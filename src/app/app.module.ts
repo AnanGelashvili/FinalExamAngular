@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';  // Import CommonModule for Angular functionality
-
+import { CommonModule } from '@angular/common'; 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  standalone: true,  // Mark as standalone
-  imports: [CommonModule],  // Include CommonModule for the basic Angular features (like ngIf, ngFor)
+  standalone: true,  
+  imports: [CommonModule], 
 })
 export class AppComponent {
   title = 'Final';

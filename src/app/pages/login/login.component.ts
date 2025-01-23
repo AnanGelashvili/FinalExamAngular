@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';  // Import FormsModule here
+import { FormsModule } from '@angular/forms'; 
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 
@@ -21,8 +21,7 @@ import { Router } from '@angular/router';
     </div>
   `,
   standalone: true,
-  imports: [FormsModule]  // Import FormsModule here
-})
+  imports: [FormsModule]  })
 export class LoginComponent {
   email = '';
   password = '';

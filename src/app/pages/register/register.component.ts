@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';  // Import FormsModule here
+import { FormsModule } from '@angular/forms';  
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 
@@ -24,7 +24,7 @@ import { Router } from '@angular/router';
     </div>
   `,
   standalone: true,
-  imports: [FormsModule]  // Import FormsModule here
+  imports: [FormsModule]  
 })
 export class RegisterComponent {
   name = '';
@@ -34,14 +34,22 @@ export class RegisterComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
   onRegister() {
-    this.authService.register({ name: this.name, email: this.email, password: this.password }).subscribe(
+    const userData = {
+      name: this.name,
+      email: this.email,
+      password: this.password,
+      role: 'user', 
+    };
+  
+    this.authService.register(userData).subscribe(
       (response: any) => {
-        this.authService.saveToken(response.access_token);
-        this.router.navigate(['/profile']);
+        this.authService.saveToken(response.access_token); 
+        this.router.navigate(['/profile']); 
       },
       (error: any) => {
         console.error('Registration failed', error);
       }
     );
   }
+  
 }

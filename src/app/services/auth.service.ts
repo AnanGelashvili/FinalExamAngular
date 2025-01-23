@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,7 @@ export class AuthService {
     return this.http.post(this.authApiUrl, credentials).pipe(
       catchError((error) => {
         console.error('Login error', error);
-        throw error; // Return the error to be handled in the component
+        throw error;
       })
     );
   }
@@ -25,7 +26,7 @@ export class AuthService {
     return this.http.post(this.userApiUrl, data).pipe(
       catchError((error) => {
         console.error('Registration error', error);
-        throw error; // Return the error to be handled in the component
+        throw error;
       })
     );
   }
@@ -43,7 +44,31 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean {
-    // In a real-world application, you should check the token's validity (expiry date, etc.)
     return !!this.getToken();
+  }
+
+  
+  decodeToken(): any {
+    const token = this.getToken();
+    if (token) {
+      try {
+        return jwtDecode(token);
+      } catch (error) {
+        console.error('Invalid token', error);
+        return null;
+      }
+    }
+    return null;
+  }
+
+  
+  getUserRole(): string | null {
+    const decodedToken = this.decodeToken();
+    return decodedToken ? decodedToken.role : null;
+  }
+
+  
+  hasRole(role: string): boolean {
+    return this.getUserRole() === role;
   }
 }

@@ -11,29 +11,24 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
-  // Fetch all users (as is, no change needed)
   getAllUsers(): Observable<any> {
     return this.http.get(this.apiUrl).pipe(
       catchError((error) => {
         console.error('Error fetching users', error);
-        throw error; // Handle the error
-      })
+        throw error;      })
     );
   }
 
-  // Fetch a user by ID (as is, no change needed)
   getUserById(id: number): Observable<any> {
     return this.http.get(`${this.apiUrl}/${id}`).pipe(
       catchError((error) => {
         console.error('Error fetching user by ID', error);
-        throw error; // Handle the error
-      })
+        throw error;       })
     );
   }
 
-  // Fetch user profile (requires Authorization header)
   getUserProfile(): Observable<any> {
-    const token = localStorage.getItem('token'); // Retrieve the token from localStorage
+    const token = localStorage.getItem('token'); 
 
     if (token) {
       return this.http.get(`${this.apiUrl}/profile`, {
@@ -43,7 +38,7 @@ export class UserService {
       }).pipe(
         catchError((error) => {
           console.error('Failed to fetch profile', error);
-          throw error; // Handle the error
+          throw error; 
         })
       );
     } else {
@@ -51,23 +46,19 @@ export class UserService {
     }
   }
 
-  // Update a user's profile (modify as necessary depending on the API)
   updateUserProfile(id: number, data: any): Observable<any> {
     return this.http.put(`${this.apiUrl}/${id}`, data).pipe(
       catchError((error) => {
         console.error('Error updating profile', error);
-        throw error; // Handle the error
-      })
+        throw error;      })
     );
   }
 
-  // Delete a user (as is, no change needed)
   deleteUser(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`).pipe(
       catchError((error) => {
         console.error('Error deleting user', error);
-        throw error; // Handle the error
-      })
+        throw error;       })
     );
   }
 }

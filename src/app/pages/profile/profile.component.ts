@@ -29,7 +29,6 @@ export class ProfileComponent implements OnInit {
       },
       (error: any) => {
         console.error('Failed to fetch user profile', error);
-        // Handle error (e.g., redirect to login page)
         this.router.navigate(['/login']);
       }
     );
