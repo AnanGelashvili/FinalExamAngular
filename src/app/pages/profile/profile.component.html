@@ -1,1 +1,11 @@
-<p>profile works!</p>
+<div class="profile">
+    <h2>Welcome, {{ user.name }}</h2>
+    <p>Email: {{ user.email }}</p>
+    
+    <div *ngIf="user.roles">
+      <p>Roles: <span *ngFor="let role of user.roles">{{ role }}</span></p>
+    </div>
+  
+    <button (click)="logout()">Logout</button>
+  </div>
+  

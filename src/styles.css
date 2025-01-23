@@ -1,1 +1,37 @@
-/* You can add global styles to this file, and also import other style files */
+/* Global Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+    color: #333;
+  }
+  
+  a {
+    color: #007BFF;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  .container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  h1, h2, h3 {
+    color: #333;
+  }
+  
+  p {
+    line-height: 1.6;
+    margin-bottom: 15px;
+  }
+  
+  nav {
+    margin-top: 20px;
+  }
+  

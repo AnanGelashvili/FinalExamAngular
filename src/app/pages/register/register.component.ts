@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';  // Import FormsModule here
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 
@@ -21,7 +22,9 @@ import { Router } from '@angular/router';
       </form>
       <p>Already have an account? <a routerLink="/login">Login here</a></p>
     </div>
-  `
+  `,
+  standalone: true,
+  imports: [FormsModule]  // Import FormsModule here
 })
 export class RegisterComponent {
   name = '';
@@ -33,12 +36,11 @@ export class RegisterComponent {
   onRegister() {
     this.authService.register({ name: this.name, email: this.email, password: this.password }).subscribe(
       (response: any) => {
-        this.authService.saveToken(response.access_token); // Assuming the API returns `access_token`
+        this.authService.saveToken(response.access_token);
         this.router.navigate(['/profile']);
       },
       (error: any) => {
         console.error('Registration failed', error);
-        // Handle error (e.g., show an error message to the user)
       }
     );
   }
