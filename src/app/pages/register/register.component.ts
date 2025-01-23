@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -27,12 +28,18 @@ export class RegisterComponent {
   email = '';
   password = '';
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   onRegister() {
-    this.authService.register({ name: this.name, email: this.email, password: this.password })
-      .subscribe(response => {
-        this.authService.saveToken(response.token);
-      });
+    this.authService.register({ name: this.name, email: this.email, password: this.password }).subscribe(
+      (response: any) => {
+        this.authService.saveToken(response.access_token); // Assuming the API returns `access_token`
+        this.router.navigate(['/profile']);
+      },
+      (error: any) => {
+        console.error('Registration failed', error);
+        // Handle error (e.g., show an error message to the user)
+      }
+    );
   }
 }

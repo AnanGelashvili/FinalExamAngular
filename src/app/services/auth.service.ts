@@ -6,16 +6,17 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:4200/api'; // Replace with your Laravel API URL
+  private authApiUrl = 'https://api.escuelajs.co/api/v1/auth/login'; // JWT Authentication API
+  private userApiUrl = 'https://api.escuelajs.co/api/v1/users'; // User API
 
   constructor(private http: HttpClient) {}
 
   login(credentials: { email: string; password: string }): Observable<any> {
-    return this.http.post(`${this.apiUrl}/login`, credentials);
+    return this.http.post(this.authApiUrl, credentials);
   }
 
   register(data: { name: string; email: string; password: string }): Observable<any> {
-    return this.http.post(`${this.apiUrl}/register`, data);
+    return this.http.post(this.userApiUrl, data);
   }
 
   logout(): void {
